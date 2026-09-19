@@ -18,19 +18,27 @@ iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/instal
 
 ### گزینه‌های اختیاری
 
+برای پاس دادن پارامتر، از الگوی زیر استفاده کنید (به‌جای `| iex`):
+
 ```powershell
 # فقط Cline Desktop:
-iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/install.ps1 | iex -Target desktop
+$s = [scriptblock]::Create((iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/install.ps1).Content); & $s -Target desktop
 
 # فقط افزونه‌ی VS Code:
-iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/install.ps1 | iex -Target extension
+$s = [scriptblock]::Create((iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/install.ps1).Content); & $s -Target extension
 
 # حذف کامل پچ (unpatch):
-iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/install.ps1 | iex -Mode unpatch
+$s = [scriptblock]::Create((iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/install.ps1).Content); & $s -Mode unpatch
 
 # اگر cline-app.exe در مسیر غیرپیش‌فرض است:
-iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/install.ps1 | iex -ExePath "D:\path\to\cline-app.exe"
+$s = [scriptblock]::Create((iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/install.ps1).Content); & $s -ExePath "D:\path\to\cline-app.exe"
 ```
+
+| پارامتر | مقدارها | پیش‌فرض |
+|---|---|---|
+| `-Mode` | `patch` \| `repatch` \| `unpatch` | `patch` |
+| `-Target` | `desktop` \| `extension` \| `both` | `both` |
+| `-ExePath` | مسیر کامل `cline-app.exe` | `%LOCALAPPDATA%\Cline\cline-app.exe` |
 
 > پروژه در `%LOCALAPPDATA%\cline-fa-rtl` نصب می‌شود تا دفعات بعدی نیز قابل استفاده باشد.
 
@@ -62,11 +70,24 @@ iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/repatc
 
 | مشکل | راه‌حل |
 |---|---|
-| `iwr : Unable to connect` | اتصال اینترنت را چک کنید؛ گاهی نیاز به VPN/پروکسی است |
+| `iwr : Unable to connect` یا `404` | اتصال اینترنت را چک کنید؛ گاهی نیاز به VPN/پروکسی است |
+| اجرای اسکریپت بلاک شد (`running scripts is disabled`) | این دستور را یک‌بار اجرا کنید: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
 | `Node.js is required` | Node.js LTS را از [nodejs.org](https://nodejs.org) نصب کنید |
 | `cline-app.exe not found` | پارامتر `-ExePath` را با مسیر صحیح بدهید |
 | پچ اعمال شد ولی تغییری ندیدم | Cline Desktop را کامل ببندید (System Tray هم) و دوباره باز کنید |
 | پیدا نشدن `iwr` | از **PowerShell 5.1+** (Windows PowerShell یا PowerShell 7) استفاده کنید |
+| می‌خواهم بدانم پچ اعمال شده یا نه | `node %LOCALAPPDATA%\cline-fa-rtl\bin\cline-desktop-rtl.js info` |
+
+---
+
+## 📋 خلاصه‌ی همه‌ی دستورها
+
+| کار | دستور |
+|---|---|
+| نصب روی سیستم جدید | `iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/install.ps1 \| iex` |
+| اعمال مجدد بعد از آپدیت | `iwr -useb https://raw.githubusercontent.com/KhtaAi/CLine_Desktop_RTL/main/repatch.ps1 \| iex` |
+| حذف پچ (دسکتاپ) | `node "$env:LOCALAPPDATA\cline-fa-rtl\bin\cline-desktop-rtl.js" unpatch` |
+| حذف پچ (افزونه) | `node "$env:LOCALAPPDATA\cline-fa-rtl\bin\cline-fa-rtl.js" unpatch` |
 
 ## 🔒 امنیت
 
