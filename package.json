@@ -1,0 +1,24 @@
+{
+  "name": "cline-fa-rtl",
+  "version": "1.0.0",
+  "description": "Force Cline (Desktop & VS Code extension) to render Persian/Farsi text with the Vazirmatn font and RTL direction.",
+  "license": "OFL-1.1",
+  "type": "commonjs",
+  "bin": {
+    "cline-fa-rtl": "bin/cline-fa-rtl.js"
+  },
+  "scripts": {
+    "patch": "node bin/cline-fa-rtl.js patch",
+    "unpatch": "node bin/cline-fa-rtl.js unpatch",
+    "patch:desktop": "node bin/cline-desktop-rtl.js patch",
+    "unpatch:desktop": "node bin/cline-desktop-rtl.js unpatch"
+  },
+  "dependencies": {
+    "@fontsource/vazirmatn": "^5.3.0",
+    "brotli-wasm": "^3.0.1",
+    "pe-library": "^2.0.1"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

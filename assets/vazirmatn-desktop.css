@@ -1,0 +1,57 @@
+/* === CLINE-FA-RTL BEGIN === */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('../media/vazirmatn-arabic-400-normal.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('../media/vazirmatn-arabic-700-normal.woff2') format('woff2');
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+/* Vazirmatn for the whole UI */
+html, body, button, input, textarea, select, option,
+p, li, span, a, td, th, label, h1, h2, h3, h4, h5, h6,
+.markdown, .cline-markdown, .cline-chat-message-content {
+  font-family: 'Vazirmatn', var(--font-sans, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif) !important;
+}
+
+/* Keep code monospace */
+pre, code, kbd, samp,
+code[class*='language-'], pre[class*='language-'],
+.cm-editor, .cm-content, .cm-line, .cm-scroller,
+[class*='monaco'], [class*='shiki'], [class*='hljs'], .token,
+.font-mono, [class*='font-mono'] {
+  font-family: var(--font-mono, ui-monospace, 'Geist Mono', SFMono-Regular, Menlo, Consolas, 'Courier New', monospace) !important;
+}
+pre *, code * { font-family: inherit !important; }
+
+/* Automatic RTL for Persian / Arabic text */
+p, li, span, a, td, th, blockquote,
+h1, h2, h3, h4, h5, h6, label, button,
+input, textarea, [contenteditable='true'],
+.markdown, .cline-markdown, .cline-chat-message-content {
+  unicode-bidi: plaintext;
+}
+
+.markdown, .cline-markdown, .cline-chat-message-content {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Code stays LTR and left aligned */
+pre, code, pre *, code *,
+.cm-editor, .cm-editor *,
+[class*='monaco'], [class*='monaco'] * {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+}
+/* === CLINE-FA-RTL END === */

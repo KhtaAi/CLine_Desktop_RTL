@@ -1,0 +1,4 @@
+node_modules/
+tmp-extract/
+extracted-assets/
+*.backup-before-fa-rtl
